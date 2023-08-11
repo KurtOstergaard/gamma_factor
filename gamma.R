@@ -4,9 +4,15 @@ library(tidyverse)
 library(tidyquant)
 library(scales)
 
-sample <- read_csv("sample data 2.csv", col_names = FALSE)
+sample <- read_csv("sample data 2.csv", 
+        col_names = FALSE,
+        col_types = list(
+          X1 = col_character(),
+          X2 = col_date(format = "%d-%b-%y"),
+          X3 = col_double()
+          )
+        )
 colnames(sample) <- c("ticker", "date", "price")
-sample$date <- as.Date(sample$date, format = "%d-%b-%y")
 
 # pretty chart
 sample |>
